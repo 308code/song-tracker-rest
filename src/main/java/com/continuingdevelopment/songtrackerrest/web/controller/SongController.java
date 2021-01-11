@@ -4,6 +4,7 @@ import com.continuingdevelopment.songtrackerrest.web.model.SongRequestObject;
 import com.continuingdevelopment.songtrackerrest.web.model.SongResponseObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class SongController {
 
     @PostMapping
-    public ResponseEntity<SongResponseObject> createSong(@RequestBody SongRequestObject songRequestObject){
+    public ResponseEntity<SongResponseObject> createSong(@Validated @RequestBody SongRequestObject songRequestObject){
         //TODO impl
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -32,7 +33,7 @@ public class SongController {
     }
 
     @PutMapping({"/{songId}"})
-    public ResponseEntity<SongResponseObject> updateSong(@PathVariable("songId") UUID songId, @RequestBody SongRequestObject songRequestObject){
+    public ResponseEntity<SongResponseObject> updateSong(@Validated @PathVariable("songId") UUID songId, @RequestBody SongRequestObject songRequestObject){
         //TODO impl
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

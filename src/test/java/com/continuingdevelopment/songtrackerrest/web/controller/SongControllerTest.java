@@ -1,5 +1,6 @@
 package com.continuingdevelopment.songtrackerrest.web.controller;
 
+import com.continuingdevelopment.songtrackerrest.web.model.MachineEnum;
 import com.continuingdevelopment.songtrackerrest.web.model.SongRequestObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +30,12 @@ class SongControllerTest {
 
     @Test
     void createSong() throws Exception {
-        SongRequestObject songRequestObject = SongRequestObject.builder().build();
+        SongRequestObject songRequestObject = SongRequestObject.builder()
+                .title("Hello")
+                .machine(MachineEnum.B)
+                .sequence("C1, C2")
+                .played(OffsetDateTime.now())
+                .build();
         String songRequestJson = objectMapper.writeValueAsString(songRequestObject);
         mockMvc.perform(post("/api/v1/song")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,7 +52,12 @@ class SongControllerTest {
 
     @Test
     void updateSong() throws Exception {
-        SongRequestObject songRequestObject = SongRequestObject.builder().build();
+        SongRequestObject songRequestObject = SongRequestObject.builder()
+                .title("Hello")
+                .machine(MachineEnum.B)
+                .sequence("C1, C2")
+                .played(OffsetDateTime.now())
+                .build();
         String songRequestJson = objectMapper.writeValueAsString(songRequestObject);
         mockMvc.perform(put("/api/v1/song/" + UUID.randomUUID())
                 .contentType(MediaType.APPLICATION_JSON)
